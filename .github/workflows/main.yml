@@ -25,3 +25,23 @@ jobs:
         context: .
         push: true
         tags: ${{secrets.DOCKER_USERNAME}}/ex_docker1:latest
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build-and-push
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Deploy to VPS
+      uses: appleboy/ssh-action@master
+      with: 
+        host: ${{secrets.VPS_HOST}}
+        username: ${{secrets.VPS_USER}}
+        key: ${{secrets.VPS_KEY}}
+        port: ${{secrets.VPS_PORT}}
+        scripts: |
+          docker pull ${{secrets.DOCKER_USERNAME}}/ex_docker1:latest
+          (sudo docker stop ex_docker1 && sudo docker rm ex_docker1) || true
+          sudo docker run -d --name ex_docker1 -p 80:80 ${{secrets.DOCKER_USERNAME}}/ex_docker1:latest
