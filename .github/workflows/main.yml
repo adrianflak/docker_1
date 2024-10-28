@@ -39,8 +39,8 @@ jobs:
       with: 
         host: ${{secrets.VPS_HOST}}
         username: ${{secrets.VPS_USER}}
-        # password: ${{secrets.VPS_PASSWORD}}
-        key: ${{secrets.VPS_KEY}}
+        password: ${{secrets.VPS_PASSWORD}}
+        # key: ${{secrets.VPS_KEY}}
         port: ${{secrets.VPS_PORT}}
         scripts: |
           docker pull ${{secrets.DOCKER_USERNAME}}/ex_docker1:latest
