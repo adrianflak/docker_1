@@ -44,5 +44,5 @@ jobs:
         port: ${{secrets.VPS_PORT}}
         script: |
           docker pull ${{secrets.DOCKER_USERNAME}}/ex_docker1:latest
-          (sudo docker stop ex_docker1 && sudo docker rm ex_docker1) || true
+          sudo docker stop ex_docker1 && sudo docker rm ex_docker1 || true
           sudo docker run -d --name ex_docker1 -p 80:80 ${{secrets.DOCKER_USERNAME}}/ex_docker1:latest
