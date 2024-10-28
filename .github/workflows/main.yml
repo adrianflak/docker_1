@@ -1,4 +1,4 @@
-name: Automatyzacja wdrożenia do DockerHub
+name: Automatyzacja wdrożenia do DockerHub!
 on: 
   push:
     branches:
